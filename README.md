@@ -1,5 +1,4 @@
 <h3>Apache Kafka</h3>
-<br>
 <br><b>Command line Tools</b>
 <br>
 <br>Create Topic:
