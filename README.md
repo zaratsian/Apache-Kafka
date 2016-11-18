@@ -1,5 +1,4 @@
 <h3>Apache Kafka</h3>
-<br><b>Command line Tools</b>
 <br>
 <br>Start:
 <br>```nohup ./bin/zookeeper-server-start.sh config/zookeeper.properties > /dev/null 2>&1 &```
