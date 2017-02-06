@@ -17,4 +17,5 @@
 <br>
 <br><b>References:</b>
 <br><a href="https://kafka.apache.org/documentation/">Kafka Documentation</a>
-<br><a href="https://pypi.python.org/pypi/pykafka/2.6.0.dev2">PyKafka</a>
+<br><a href="https://pypi.python.org/pypi/pykafka/2.6.0.dev2">Python PyKafka</a>
+<br><a href="https://pypi.python.org/pypi/kafka/1.2.5">Python Kafka</a>
