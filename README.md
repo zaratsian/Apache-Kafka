@@ -16,4 +16,5 @@
 <br>```./bin/kafka-console-consumer.sh --zookeeper zkhost:2181 --topic topicdz1 --from-beginning```
 <br>
 <br>References:
+<br><a href="https://kafka.apache.org/documentation/">Kafka Documentation</a>
 <br>
