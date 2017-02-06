@@ -15,6 +15,6 @@
 <br>CMD Line Consumer:
 <br>```./bin/kafka-console-consumer.sh --zookeeper zkhost:2181 --topic topicdz1 --from-beginning```
 <br>
-<br>References:
+<br><b>References:</b>
 <br><a href="https://kafka.apache.org/documentation/">Kafka Documentation</a>
-<br>
+<br><a href="https://pypi.python.org/pypi/pykafka/2.6.0.dev2">PyKafka</a>
