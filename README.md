@@ -9,7 +9,7 @@
 <br>List Topics:
 <br>```./bin/kafka-topics.sh --zookeeper zkhost:2181 --list```
 <br>
-<br>CMD Line Producer:
+<br>CMD Line Producer:  (Default Broker Port: 9092, Hortonworks uses broker port: 6667)
 <br>```echo "DZ Test Message" | ./bin/kafka-console-producer.sh --broker-list kafkahost:6667 --topic topicdz1 > /dev/null```
 <br>
 <br>CMD Line Consumer:
