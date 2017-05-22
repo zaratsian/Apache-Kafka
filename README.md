@@ -6,6 +6,9 @@
 <br><b>Create Topic:</b>
 <br>./bin/kafka-topics.sh --create --zookeeper zkhost:2181 --replication-factor 1 --partitions 1 --topic topicdz1
 <br>
+<br><b>Delete Topic:</b>
+<br>./bin/kafka-topics.sh --delete --zookeeper localhost:2181 --topic your_topic_name
+<br>
 <br><b>List Topics:</b>
 <br>./bin/kafka-topics.sh --zookeeper zkhost:2181 --list
 <br>
