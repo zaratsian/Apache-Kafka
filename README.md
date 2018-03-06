@@ -20,8 +20,8 @@
 <br><b>CMD Line Producer:</b>  (Default Broker Port: 9092, Hortonworks uses broker port: 6667)
 <br>echo "DZ Kafka Event at $(date)" | ./bin/kafka-console-producer.sh --broker-list kafkahost:9092 --topic dztopic1 > /dev/null
 <br>
-<br><b>CMD Line Consumer:</b>
-<br>./bin/kafka-console-consumer.sh --zookeeper zkhost:2181 --topic dztopic1 --from-beginning
+<br><b>CMD Line Consumer:</b> (Default Broker Port: 9092, Hortonworks uses broker port: 6667)
+<br>./bin/kafka-console-consumer.sh --bootstrap-server kafka_broker:6667 --topic dztopic1 --from-beginning
 <br>
 <br><b>References:</b>
 <br><a href="https://kafka.apache.org/documentation/">Kafka Documentation</a>
