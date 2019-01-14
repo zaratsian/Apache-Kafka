@@ -73,7 +73,7 @@ if __name__ == "__main__":
         #producer= KafkaProducer(bootstrap_servers=args['bootstrap_servers'])                                                               # String-based Producer
         producer = KafkaProducer(bootstrap_servers=args['bootstrap_servers'], value_serializer=lambda v: json.dumps(v).encode('utf-8'))     # JSON-based Producer
     except Exception as e:
-        print('[ EXCEPTION ] {}'.format(e))
+        print('[ EXCEPTION ] At Kafka Producer Setup - {}'.format(e))
     
     counter = 0
     while True:
@@ -83,8 +83,11 @@ if __name__ == "__main__":
         payload = simulate_payload()
         
         if args['send_to_kafka']==1:
-            #producer.send(kafka_topic, 'test message {}'.format(counter).encode('utf-8') )     # String-based kafka commit
-            producer.send(args['kafka_topic'], value=payload)                                   # JSON-based kafka commit
+            try:
+                #producer.send(kafka_topic, 'test message {}'.format(counter).encode('utf-8') )     # String-based kafka commit
+                producer.send(args['kafka_topic'], value=payload)                                   # JSON-based kafka commit
+            except Exception as e:
+                print('[ EXCEPTION ] At Kafka Producer Send - {}'.format(e))
         
         print(payload)
         print('\n')
