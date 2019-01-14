@@ -4,7 +4,7 @@
 #   Data Simulator for Apache Kafka
 #
 #   USAGE:
-#   simulate_to_kafka.py --kafka_topic dztopic1 --time_delay 1 --send_to_kafka False
+#   simulate_to_kafka.py --bootstrap_servers localhost:9092 --kafka_topic dztopic1 --time_delay 1 --send_to_kafka 0
 #
 #   Test with python 3.7
 #   https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
@@ -14,13 +14,13 @@
 #
 #####################################################################
 
+
 from kafka import KafkaProducer     
 import json
 import re
 import datetime, time
 import random
 import argparse
-
 
 
 def simulate_payload():
@@ -51,23 +51,27 @@ def simulate_payload():
 if __name__ == "__main__":
     
     # ONLY used for TESTING - Example Arguments
-    #args =  {
-    #           "kafka_topic":   "dztopic1",
-    #           "time_delay":    1,
-    #           "send_to_kafka": False,
-    #       }
+    '''
+    args =  {
+                "bootstrap_servers": "localhost:9092",
+                "kafka_topic":       "dztopic1",
+                "time_delay":        1,
+                "send_to_kafka":     0
+            }
+    '''
     
     # Arguments
     ap = argparse.ArgumentParser()
-    ap.add_argument("--kafka_topic",    required=True,                                help="Apache Kafka Topic Name")
-    ap.add_argument("--time_delay",     required=False, default=1,     type=int,      help="Time delay inbetween simulations (seconds)")
-    ap.add_argument("--send_to_kafka",  required=False, default=False, type=str2bool, help="Send to Kafka (True) or send to console (False)")
+    ap.add_argument("--bootstrap_servers",  required=True,  default='localhost:9092',   help="Apache Kafka Bootstrap Servers")
+    ap.add_argument("--kafka_topic",        required=True,                              help="Apache Kafka Topic Name")
+    ap.add_argument("--time_delay",         required=False, default=1, type=int,        help="Time delay inbetween simulations (seconds)")
+    ap.add_argument("--send_to_kafka",      required=False, default=0, type=int,        help="Send to Kafka (1) or send to console (0)")
     args = vars(ap.parse_args())
     
     try:
         # Setup Kafka Producer
-        #producer= KafkaProducer(bootstrap_servers=['localhost:9092'])                          # String-based Producer
-        producer = KafkaProducer(value_serializer=lambda v: json.dumps(v).encode('utf-8'))      # JSON-based Producer
+        #producer= KafkaProducer(bootstrap_servers=args['bootstrap_servers'])                                                               # String-based Producer
+        producer = KafkaProducer(bootstrap_servers=args['bootstrap_servers'], value_serializer=lambda v: json.dumps(v).encode('utf-8'))     # JSON-based Producer
     except Exception as e:
         print('[ EXCEPTION ] {}'.format(e))
     
@@ -78,14 +82,14 @@ if __name__ == "__main__":
         
         payload = simulate_payload()
         
-        if send_to_kafka:
+        if args['send_to_kafka']==1:
             #producer.send(kafka_topic, 'test message {}'.format(counter).encode('utf-8') )     # String-based kafka commit
-            producer.send(kafka_topic, value=payload)                                           # JSON-based kafka commit
-        else:
-            print(payload)
-            print('\n')
+            producer.send(args['kafka_topic'], value=payload)                                   # JSON-based kafka commit
         
-        time.sleep(time_delay)
+        print(payload)
+        print('\n')
+        
+        time.sleep(args['time_delay'])
 
 
 
