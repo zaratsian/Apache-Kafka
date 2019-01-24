@@ -14,7 +14,7 @@ gcloud auth configure-docker
 # Tag the image with a registry name
 project_id=ml-healthcare-poc-201901 
 container_name=kafka_simulator_threaded
-docker tag kafka_simulator gcr.io/$project_id/$container_name
+docker tag kafka_simulator_threaded gcr.io/$project_id/$container_name
 
 
 # Push the image to Container Registry
