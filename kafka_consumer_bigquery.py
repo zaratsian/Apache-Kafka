@@ -6,7 +6,8 @@
 #   USAGE: python kafka_consumer_bigquery.py &
 #
 #   Requirements:
-#   
+#       pip install kafka-python
+#       pip install --upgrade google-cloud-bigquery
 #
 #####################################################################
 
