@@ -1,5 +1,4 @@
 
-
 #############################################################################
 #
 #   Variables
@@ -8,7 +7,8 @@
 gke_cluster_name=gke-cluster-z1
 gke_app_name=gke-app-z1
 gke_app_image=gcr.io/ml-healthcare-poc-201901/kafka_simulator_threaded
-number_of_replicas=5
+number_of_nodes=10
+number_of_replicas=$((number_of_nodes * 2))
 gke_compute_zone=us-central1-b
 
 
@@ -21,7 +21,7 @@ gke_compute_zone=us-central1-b
 # Create a GKE Cluster
 #gcloud config set compute/zone $$gke_compute_zone
 gcloud container clusters create $gke_cluster_name \
-    --num-nodes 3 \
+    --num-nodes $number_of_nodes \
     --machine-type n1-standard-1 \
     --zone $gke_compute_zone
 
@@ -74,7 +74,7 @@ kubectl get services
 #kubectl get service $gke_app_name
 
 # Get Deployments
-#kubectl get deployments
+kubectl get deployments
 
 # Get Pods
 kubectl get pods
@@ -108,7 +108,10 @@ kubectl get pods
 # Delete a service
 #kubectl delete service $gke_app_name
 
-# Delete a service
+# Delete a Deployment
+#kubectl delete deployment $gke_app_name
+
+# Delete GKE Cluster
 #gcloud container clusters delete $gke_cluster_name --zone $gke_compute_zone
 
 
