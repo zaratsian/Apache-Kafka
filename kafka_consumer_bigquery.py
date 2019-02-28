@@ -18,7 +18,8 @@ import json
 from kafka import KafkaConsumer, KafkaProducer
 from google.cloud import bigquery
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/home/xyz/key.json"  # Service Acct
+#os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/home/xyz/key.json"  # Service Acct
+
 
 #####################################################################
 #
@@ -51,11 +52,20 @@ def kafka_consumer_to_bigquery():
     
     consumer.subscribe([kafka_topic])
     
+    # Initialize Rows
+    rows_to_insert = []
+    
     while not stop_event.is_set():
-        for message in consumer:
-            #print(message)
-            rows_to_insert = [json.loads(message.value)]
-            bg_streaming_insert(rows_to_insert, bq_dataset_id, bq_table_id)
+        for i, message in enumerate(consumer):
+            
+            if (i % bulk_load_count)!=0:
+                rows_to_insert.append( json.loads(message.value) )
+            else:
+                rows_to_insert.append( json.loads(message.value) )
+                bg_streaming_insert(rows_to_insert, bq_dataset_id, bq_table_id)
+                # Reset rows
+                rows_to_insert = []
+            
             if stop_event.is_set():
                 break
     
@@ -70,10 +80,11 @@ def kafka_consumer_to_bigquery():
 
 if __name__ == "__main__":
     
-    kafka_topic         = ''
-    bootstrap_servers   = 'localhost:9092'
-    bq_dataset_id       = ''
-    bq_table_id         = ''
+    kafka_topic         = 'eye_tracking'
+    bootstrap_servers   = '35.184.69.2:9092'
+    bq_dataset_id       = 'ml_healthcare_ds'
+    bq_table_id         = 'eye_tracking_data'
+    bulk_load_count     = 1000
     
     kafka_consumer_to_bigquery()
 
