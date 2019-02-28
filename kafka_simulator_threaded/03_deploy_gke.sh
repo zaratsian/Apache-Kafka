@@ -7,7 +7,7 @@
 #############################################################################
 gke_cluster_name=gke-cluster-z1
 gke_app_name=gke-app-z1
-gke_app_image=gcr.io/ml-healthcare-poc-201901/kafka_simulator
+gke_app_image=gcr.io/ml-healthcare-poc-201901/kafka_simulator_threaded
 number_of_replicas=5
 gke_compute_zone=us-central1-b
 
@@ -58,7 +58,7 @@ kubectl scale deployment $gke_app_name --replicas $number_of_replicas
 #
 #############################################################################
 
-kubectl edit deployment $gke_app_name
+#kubectl edit deployment $gke_app_name
 
 
 #############################################################################
@@ -71,19 +71,19 @@ kubectl edit deployment $gke_app_name
 kubectl get services
 
 # Inspect the app
-kubectl get service $gke_app_name
+#kubectl get service $gke_app_name
 
 # Get Deployments
-kubectl get deployments
+#kubectl get deployments
 
 # Get Pods
 kubectl get pods
 
 # Cluster Info
-kubectl cluster-info
+#kubectl cluster-info
 
 # Configs
-kubectl config view
+#kubectl config view
 
 
 #############################################################################
@@ -93,10 +93,10 @@ kubectl config view
 #############################################################################
 
 # Get Events
-kubectl get events
+#kubectl get events
 
 # Pod Logs
-kubectl logs <pod-name>
+#kubectl logs <pod-name>
 
 
 #############################################################################
@@ -106,10 +106,10 @@ kubectl logs <pod-name>
 #############################################################################
 
 # Delete a service
-kubectl delete service $gke_app_name
+#kubectl delete service $gke_app_name
 
 # Delete a service
-gcloud container clusters delete $gke_cluster_name --zone $gke_compute_zone
+#gcloud container clusters delete $gke_cluster_name --zone $gke_compute_zone
 
 
 
