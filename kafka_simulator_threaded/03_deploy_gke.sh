@@ -8,7 +8,7 @@
 gke_cluster_name=gke-cluster-z1
 gke_app_name=gke-app-z1
 gke_app_image=gcr.io/ml-healthcare-poc-201901/kafka_simulator
-number_of_replicas=10
+number_of_replicas=5
 gke_compute_zone=us-central1-b
 
 
@@ -20,7 +20,10 @@ gke_compute_zone=us-central1-b
 
 # Create a GKE Cluster
 #gcloud config set compute/zone $$gke_compute_zone
-gcloud container clusters create $gke_cluster_name --zone $gke_compute_zone
+gcloud container clusters create $gke_cluster_name \
+    --num-nodes 3 \
+    --machine-type n1-standard-1 \
+    --zone $gke_compute_zone
 
 
 # Get authentication credentials for the cluster
@@ -51,9 +54,21 @@ kubectl scale deployment $gke_app_name --replicas $number_of_replicas
 
 #############################################################################
 #
-#   Status and Diagnosis
+#   Upgrade
 #
 #############################################################################
+
+kubectl edit deployment $gke_app_name
+
+
+#############################################################################
+#
+#   Status
+#
+#############################################################################
+
+# Get Services
+kubectl get services
 
 # Inspect the app
 kubectl get service $gke_app_name
@@ -63,6 +78,25 @@ kubectl get deployments
 
 # Get Pods
 kubectl get pods
+
+# Cluster Info
+kubectl cluster-info
+
+# Configs
+kubectl config view
+
+
+#############################################################################
+#
+#   Troubleshooting
+#
+#############################################################################
+
+# Get Events
+kubectl get events
+
+# Pod Logs
+kubectl logs <pod-name>
 
 
 #############################################################################
