@@ -23,6 +23,9 @@
 <br><b>CMD Line Consumer:</b> (Default Broker Port: 9092, Hortonworks uses broker port: 6667)
 <br>./bin/kafka-console-consumer.sh --bootstrap-server kafka_broker:6667 --topic dztopic1 --from-beginning
 <br>
+<br><b>Purge Kafka Topic</b>
+<br>/opt/kafka/bin/kafka-topics.sh --zookeeper localhost:2181 --alter --topic eye_tracking --config retention.ms=1000
+<br>
 <br><b>References:</b>
 <br><a href="https://kafka.apache.org/documentation/">Kafka Documentation</a>
 <br><a href="https://pypi.python.org/pypi/pykafka/2.6.0.dev2">Python PyKafka</a>
