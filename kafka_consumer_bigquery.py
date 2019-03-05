@@ -32,7 +32,6 @@ def bg_streaming_insert(rows_to_insert, bq_dataset_id, bq_table_id):
     
     # Note: The table must already exist and have a defined schema
     # rows_to_insert is a list of variables (i.e. (id, date, value1, value2, etc.))
-    #print('[ INFO ] Inserting records in BigQuery')
     client    = bigquery.Client()
     table_ref = client.dataset(bq_dataset_id).table(bq_table_id)
     table     = client.get_table(table_ref)
