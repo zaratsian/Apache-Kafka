@@ -80,10 +80,10 @@ def kafka_consumer_to_bigquery():
 
 if __name__ == "__main__":
     
-    kafka_topic         = 'eye_tracking'
-    bootstrap_servers   = '35.184.69.2:9092'
-    bq_dataset_id       = 'ml_healthcare_ds'
-    bq_table_id         = 'eye_tracking_data'
+    kafka_topic         = 'mytopic'
+    bootstrap_servers   = '10.11.12.13:9092'
+    bq_dataset_id       = 'bq_dataset_id'
+    bq_table_id         = 'bq_table_id'
     bulk_load_count     = 1000
     
     kafka_consumer_to_bigquery()
